@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/smarigowda/tau-intro-cypress-giltayar/issues"
   },
-  "homepage": "https://github.com/smarigowda/tau-intro-cypress-giltayar#readme"
+  "homepage": "https://github.com/smarigowda/tau-intro-cypress-giltayar#readme",
+  "dependencies": {
+    "cypress": "^4.8.0"
+  }
 }
