@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe("to do actions", function () {
-  it("Should add a new to do to the list", function () {
+  it.only("Should add a new to do to the list", function () {
     cy.visit("http://todomvc-app-for-testing.surge.sh");
     cy.get(".new-todo", { timeout: 6000 })
       .type("Learn Cypress")
