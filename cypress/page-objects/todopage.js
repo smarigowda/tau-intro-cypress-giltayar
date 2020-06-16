@@ -8,7 +8,6 @@ export default class TodoPage {
   getToDo() {
     return cy.get(`.todo-list li:nth-child(${this.todoIndex + 1})`);
   }
-
   addToDo(description) {
     cy.get(this.selector.newToDo, { timeout: 6000 })
       .type(description)
