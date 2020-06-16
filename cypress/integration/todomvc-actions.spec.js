@@ -1,25 +1,35 @@
 /// <reference types="cypress" />
 
+import TodoPage from "../page-objects/todopage";
+
+let todo = new TodoPage();
+
 describe("to do actions", function () {
   beforeEach("setup for each test", function () {
-    cy.visit("http://todomvc-app-for-testing.surge.sh");
-    cy.get(".new-todo", { timeout: 6000 })
-      .type("Learn Cypress")
-      .type("{enter}");
+    todo
+      .navigateTo("http://todomvc-app-for-testing.surge.sh")
+      .addToDo("Clean the house")
+      .addToDo("Learn Cypress");
   });
   it("Should add a new to do to the list", function () {
-    cy.get("label").should("have.text", "Learn Cypress");
-    cy.get("input.toggle").should("not.be.checked");
+    todo.setTodoIndexTo(0).verifyText("Learn Cypress").shouldNotBeChecked();
   });
 
   it("Should mark a to do as completed", function () {
-    cy.get("input.toggle").click();
-    cy.get("label").should("have.css", "text-decoration-line", "line-through");
+    todo.setTodoIndexTo(0).toggle().shouldHaveLineThrough();
+  });
+
+  it("Should mark the to do as not completed", function () {
+    todo
+      .setTodoIndexTo(0)
+      .toggle()
+      .shouldHaveLineThrough()
+      .toggle()
+      .shouldNotHaveLineThrough();
   });
 
   it("Should clear completed to dos", function () {
-    cy.get("input.toggle").click();
-    cy.contains("Clear completed").click();
-    cy.get("ul.todo-list").should("not.have.descendants", "li");
+    todo.setTodoIndexTo(0).toggle().clearCompleted().verifyTodoItemsCount(1);
+    todo.setTodoIndexTo(0).toggle().clearCompleted().verifyTodoItemsCount(0);
   });
 });
