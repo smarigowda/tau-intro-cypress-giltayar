@@ -1,11 +1,13 @@
 /// <reference types="cypress" />
 
 describe("to do actions", function () {
-  it.only("Should add a new to do to the list", function () {
+  beforeEach("setup for each test", function () {
     cy.visit("http://todomvc-app-for-testing.surge.sh");
     cy.get(".new-todo", { timeout: 6000 })
       .type("Learn Cypress")
       .type("{enter}");
+  });
+  it("Should add a new to do to the list", function () {
     cy.get("label").should("have.text", "Learn Cypress");
     cy.get("input.toggle").should("not.be.checked");
   });
@@ -16,6 +18,7 @@ describe("to do actions", function () {
   });
 
   it("Should clear completed to dos", function () {
+    cy.get("input.toggle").click();
     cy.contains("Clear completed").click();
     cy.get("ul.todo-list").should("not.have.descendants", "li");
   });
