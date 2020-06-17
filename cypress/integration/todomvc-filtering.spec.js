@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe("filtering spec", function () {
   beforeEach("setup for each test", function () {
     cy.visit("http://todomvc-app-for-testing.surge.sh");
