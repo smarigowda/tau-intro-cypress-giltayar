@@ -6,8 +6,18 @@ let todoPage;
 
 describe("Visual Spec", function () {
   before("open the app", function () {
-    cy.visit("http://todomvc-app-for-testing.surge.sh");
-    cy.eyesOpen({ appName: "Cypress Course", batchName: "Cypress Course" });
+    // cy.visit("http://todomvc-app-for-testing.surge.sh");
+    cy.visit("http://todomvc-app-for-testing.surge.sh/?different-title-color");
+    cy.eyesOpen({
+      appName: "Cypress Course",
+      batchName: "Cypress Course",
+      browser: [
+        { name: "chrome", width: 1024, height: 768 },
+        { name: "chrome", width: 800, height: 600 },
+        { name: "firefox", width: 1024, height: 768 },
+        { deviceName: "iPhone X" },
+      ],
+    });
     todoPage = new TodoPage();
   });
   after("After block", function () {
