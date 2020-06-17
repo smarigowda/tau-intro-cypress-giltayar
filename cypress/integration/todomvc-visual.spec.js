@@ -14,7 +14,11 @@ describe("Visual Spec", function () {
     cy.eyesClose();
   });
   it("Should do the visual checking", function () {
+    cy.eyesCheckWindow("Empty to do");
     todoPage.addToDo("Hello welcome to Cypress");
-    cy.eyesCheckWindow("One to do added");
+    todoPage.addToDo("Clean the house");
+    cy.eyesCheckWindow("Two To Do items added");
+    todoPage.setTodoIndexTo(0).toggle();
+    cy.eyesCheckWindow("One of the To Do completed");
   });
 });
